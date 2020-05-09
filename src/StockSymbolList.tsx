@@ -3,7 +3,7 @@ import StockService, { StockSymbol } from './services/StockService';
 
 type Props = {
     filterText: string
-    onStockSymbolChange: (newValue: string) => void;
+    onStockSymbolChange: (newValue: StockSymbol) => void;
 }
 
 const StockSymbolList: React.FC<Props> = ({ filterText, onStockSymbolChange }) => {
@@ -15,16 +15,16 @@ const StockSymbolList: React.FC<Props> = ({ filterText, onStockSymbolChange }) =
         });
     }, [filterText])
 
-    function handleOnSelectStockSymbol(e: any) {
+    function handleOnSelectStockSymbol(e: React.MouseEvent<HTMLElement>) {
         e.preventDefault();
         e.stopPropagation();
-        onStockSymbolChange(e.target.innerHTML);
+        onStockSymbolChange({ name: (e.target as any).innerHTML, symbol: (e.target as any).dataset.id });
     }
 
     return (
         <div>
             <ul onClick={handleOnSelectStockSymbol}>
-                {stockSymbols && stockSymbols.map((d: StockSymbol, index: number) => <li key={index}>{d["2. name"]}</li>)}
+                {stockSymbols && stockSymbols.map((ss: StockSymbol, index: number) => <li key={index} data-id={ss.symbol}>{ss.name}</li>)}
             </ul>
         </div>
     );

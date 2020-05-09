@@ -4,7 +4,7 @@ import StockSymbolSearch from './StockSymbolSearch';
 import StockSymbolList from './StockSymbolList';
 
 type Props = {
-    onStockSymbolChange: (newValue: string) => void;
+    onStockSymbolChange: (newValue: StockSymbol) => void;
 }
 
 const StockSymbolPanel: React.FC<Props> = ({ onStockSymbolChange }: Props) => {
@@ -21,7 +21,7 @@ const StockSymbolPanel: React.FC<Props> = ({ onStockSymbolChange }: Props) => {
         setFilterText(newValue);
     }
 
-    function handleOnStockSymbolChange(newValue: string) {
+    function handleOnStockSymbolChange(newValue: StockSymbol) {
         onStockSymbolChange(newValue);
     }
 

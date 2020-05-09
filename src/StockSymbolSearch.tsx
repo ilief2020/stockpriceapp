@@ -7,10 +7,10 @@ type Props = {
 }
 
 const StockSymbolSearch: React.FC<Props> = ({ filterText, onFilterTextChange }) => {
-    function onChange(e: any) {
+    function onChange(e: React.FormEvent) {
         e.preventDefault();
         e.stopPropagation();
-        onFilterTextChange(e.target.value);
+        onFilterTextChange((e.target as any).value);
     }
 
     return (
