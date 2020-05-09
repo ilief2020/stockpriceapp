@@ -24,13 +24,13 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
         //setTimeFrame(stringToTimeSeries(e.target.data-id))
     }
     return (
-        <>
+        <div className="item">
             {/* <ul onClick={onTimeFrameChange}>
                 
                   {Object.entries(TimeSeriesType).map(( value : [string, TimeSeriesType]) => <li key={value.} data-id={key}>{ss.name}</li>)} </ul> */}
 
             <StockSymbolChart stockSymbol={stockSymbol} stockTimeSeries={stockTimeSeries} timeSeriesType={currTimeSeriesType} />
-        </>
+        </div >
     );
 }
 

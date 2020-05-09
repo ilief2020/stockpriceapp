@@ -108,7 +108,7 @@ const StockSymbolChart: React.FC<Props> = ({ stockTimeSeries, stockSymbol, timeS
 
     return (
         <div>
-            <button type="button" onClick={refreshChart}>Click Me!</button>
+
             {stockSymbol && <CanvasJSChart options={options}
                 onRef={(ref: any) => {
                     chartRef = ref

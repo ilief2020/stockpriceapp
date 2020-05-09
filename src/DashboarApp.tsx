@@ -13,8 +13,7 @@ const DashboardApp: React.FC = () => {
     }
 
     return (
-        <div>
-            <h2>Dashboard for {currentStockSymbol?.name}</h2>
+        <div className="container">
             <StockSymbolPanel onStockSymbolChange={handleOnStockSymbolChange} />
             <DashboardPanel stockSymbol={currentStockSymbol} />
         </div>

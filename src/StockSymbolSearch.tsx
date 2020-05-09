@@ -15,7 +15,6 @@ const StockSymbolSearch: React.FC<Props> = ({ filterText, onFilterTextChange }) 
 
     return (
         <div>
-            <h2>Stock Symbol</h2>
             <input value={filterText} onChange={onChange}></input>
         </div>
     );
