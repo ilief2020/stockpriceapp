@@ -95,8 +95,6 @@ const StockSymbolChart: React.FC<Props> = ({ stockTimeSeries, stockSymbol, timeS
                     y: total / numOfDays
                 });
             }
-            console.log(chart.options.data[0].dataPoints);
-            console.log(chart.options.data[1].dataPoints);
         }
     }
 

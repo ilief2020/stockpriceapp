@@ -3,13 +3,15 @@
 }
 
 .item2 {
-     flex-grow: 1; 
+  margin:10px;
+    flex-grow: 1; 
     height: 100px;
   }
   
   .item {
-    width : 400px;
-   height: 100px;
+  width : 300px;
+  height: 100px;
+  margin:10px;
  }
   .item + .item {
     margin-left: 2%;

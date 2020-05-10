@@ -1,3 +1,6 @@
 .search-div {
     margin-left: 30px;
 }
+.search-input {
+line-height: 20px;
+}

@@ -16,7 +16,7 @@ const SearchComp: React.FC<Props> = ({ filterText, onFilterTextChange }) => {
 
     return (
         <div className='search-div'>
-            <input placeholder='Search ...' value={filterText} onChange={onChange}></input>
+            <input className='search-input' placeholder='Search ...' value={filterText} onChange={onChange}></input>
         </div>
     );
 }

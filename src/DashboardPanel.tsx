@@ -46,7 +46,7 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
                     }
                     setStockTimeSeries(data)
                 });
-    }, [stockSymbol])
+    }, [stockSymbol, currTimeSeriesType])
 
 
     return (
@@ -54,6 +54,7 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
             <div><b>Stock Symbol:   {stockSymbol?.name} </b></div><br />
             <CalendarPicker label='Start Date' date={timeFrame.startDate} onDateChange={onStartDateChange} />
             <CalendarPicker label='End Date' date={timeFrame.endDate} onDateChange={onEndDateChange} />
+
             <StockSymbolChart stockSymbol={stockSymbol} stockTimeSeries={stockTimeSeries} timeSeriesType={currTimeSeriesType} timeFrame={timeFrame} />
         </div >
     );
