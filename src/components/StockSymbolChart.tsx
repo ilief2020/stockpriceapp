@@ -6,7 +6,6 @@ import { StockSymbol } from '../model/StockSymbol';
 import { StockTimeSeries } from '../model/StockTimeSeries';
 import { TimeSeriesType } from '../model/TimeSeriesType';
 import { TimeFrame } from '../model/TimeFrame';
-import { start } from 'repl';
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -21,7 +20,6 @@ type Props = {
     stockSymbol: StockSymbol | undefined;
     timeSeriesType: TimeSeriesType;
     timeFrame: TimeFrame | undefined;
-    // onFilterTextChange: (newValue: string) => void;
 }
 
 const opts = {
@@ -71,7 +69,6 @@ const opts = {
 const StockSymbolChart: React.FC<Props> = ({ stockTimeSeries, stockSymbol, timeSeriesType, timeFrame }) => {
     const [chart, setChart] = useState<any>();
 
-    //const [options, setOptions] = useState<any>(opts);
     let options: any = opts;
 
     let chartRef: any;
