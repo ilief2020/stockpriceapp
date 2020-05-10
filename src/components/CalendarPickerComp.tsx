@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Calendar from 'react-calendar';
 import dateFormat from 'dateformat';
@@ -33,7 +33,7 @@ const CalendarPicker: React.FC<Props> = ({ label, date, onDateChange }) => {
 
     return (
         <div>
-            <div onClick={onStartDateClick}>{label} {formatAsString(date)}</div>
+            <div className="datelabel" onClick={onStartDateClick}><b>{label}</b> {formatAsString(date)}</div>
             {editStartDate &&
                 <div className="calendar">
                     <Calendar

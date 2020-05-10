@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import StockService from './services/StockService';
+import React, { useState } from 'react';
 import { StockSymbol } from './model/StockSymbol';
 
 import StockSymbolPanel from './StockSymbolPanel';
 import DashboardPanel from './DashboardPanel';
-
-
 
 import './DashboarApp.css';
 
@@ -19,8 +16,12 @@ const DashboardApp: React.FC = () => {
 
     return (
         <div className="container">
-            <StockSymbolPanel onStockSymbolChange={handleOnStockSymbolChange} />
-            <DashboardPanel stockSymbol={currentStockSymbol} />
+            <div className='item'>
+                <StockSymbolPanel onStockSymbolChange={handleOnStockSymbolChange} />
+            </div>
+            <div className='item2'>
+                <DashboardPanel stockSymbol={currentStockSymbol} />
+            </div>
         </div>
     );
 }

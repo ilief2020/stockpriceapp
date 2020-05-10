@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import StockService from './services/StockService';
 import { StockSymbol } from './model/StockSymbol';
-import StockSymbolSearch from './StockSymbolSearch';
-import StockSymbolList from './StockSymbolList';
+import SearchComp from './components/SearchComp';
+import StockSymbolList from './components/StockSymbolList';
 
 type Props = {
     onStockSymbolChange: (newValue: StockSymbol) => void;
@@ -28,7 +28,7 @@ const StockSymbolPanel: React.FC<Props> = ({ onStockSymbolChange }: Props) => {
 
     return (
         <div className="item">
-            <StockSymbolSearch filterText={filterText} onFilterTextChange={handleOnFilterTextChange} />
+            <SearchComp filterText={filterText} onFilterTextChange={handleOnFilterTextChange} />
             <StockSymbolList filterText={filterText} onStockSymbolChange={handleOnStockSymbolChange} />
         </div>
     );

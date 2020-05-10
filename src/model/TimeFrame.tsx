@@ -17,6 +17,7 @@ export class TimeFrame {
     getStartDate() {
         return this.startDate;
     }
+
     getEndDate() {
         return this.endDate;
     }

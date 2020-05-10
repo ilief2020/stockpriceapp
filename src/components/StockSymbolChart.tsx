@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import CanvasJSReact from './lib/canvasjs.react';
+import CanvasJSReact from '../lib/canvasjs.react';
 
-import { StockSymbol } from './model/StockSymbol';
-import { StockTimeSeries } from './model/StockTimeSeries';
-import { TimeSeriesType } from './model/TimeSeriesType';
-import { TimeFrame } from './model/TimeFrame';
+import { StockSymbol } from '../model/StockSymbol';
+import { StockTimeSeries } from '../model/StockTimeSeries';
+import { TimeSeriesType } from '../model/TimeSeriesType';
+import { TimeFrame } from '../model/TimeFrame';
 import { start } from 'repl';
 
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -50,13 +50,21 @@ const opts = {
         }
     },
     data: [{
-        type: "area",
+        type: "column",
         xValueFormatString: "DD MMM",
         yValueFormatString: "€##0.00",
         dataPoints: [
 
         ]
-    }]
+    },
+    {
+        type: "spline",
+        markerSize: 0,
+        name: "SMA",
+        yValueFormatString: "#,##0.00",
+        dataPoints: []
+    }
+    ]
 }
 
 
@@ -69,31 +77,33 @@ const StockSymbolChart: React.FC<Props> = ({ stockTimeSeries, stockSymbol, timeS
     let chartRef: any;
 
 
-    // useEffect(() => {
-    //     if (!stockTimeSeries) return;
-    //     let dataPoints: DataPointsType[] = [];
-    //     for (var i = 0; i < stockTimeSeries.length; i++) {
-    //         dataPoints.push({
-    //             x: stockTimeSeries[i].date,
-    //             y: stockTimeSeries[i].open
-    //         });
-    //     }
-    //     options.data[0].dataPoints = dataPoints;
-
-    //     if (chartRef) {
-    //         setChart(chartRef);
-    //         chartRef.render();
-    //     }
-    //     let chartLocal = chart ? chart : chartRef;
-    //     if (chartLocal) {
-    //         chartLocal.render();
-    //     }
-    // }, [stockTimeSeries])
+    function calculateMovingAverage(chart: any) {
+        var numOfDays = 5;
+        // return if there are insufficient dataPoints
+        if (chart.options.data[0].dataPoints.length <= numOfDays) {
+            chart.options.data[1].dataPoints = [];
+        }
+        else {
+            var total;
+            for (var i = 0; i < chart.options.data[0].dataPoints.length - numOfDays; i++) {
+                total = 0;
+                for (var j = i; j < i + numOfDays; j++) {
+                    total += chart.options.data[0].dataPoints[j].y;
+                }
+                chart.options.data[1].dataPoints.push({
+                    x: chart.options.data[0].dataPoints[i].x,
+                    y: total / numOfDays
+                });
+            }
+            console.log(chart.options.data[0].dataPoints);
+            console.log(chart.options.data[1].dataPoints);
+        }
+    }
 
     useEffect(() => {
         if (!stockSymbol) return;
 
-        if (timeSeriesType == TimeSeriesType.TIME_SERIES_MONTHLY) {
+        if (timeSeriesType === TimeSeriesType.TIME_SERIES_MONTHLY) {
             options.axisX.valueFormatString = "DD MMM yyyy";
         }
         options.title.text = 'Stock Price of ' + stockSymbol.symbol + '-' + timeSeriesType.displayName;
@@ -107,18 +117,16 @@ const StockSymbolChart: React.FC<Props> = ({ stockTimeSeries, stockSymbol, timeS
     }, [stockSymbol, timeSeriesType])
 
     useEffect(() => {
-        console.log('timeframe effect ', timeFrame);
         if (!timeFrame || !stockTimeSeries) return;
         var startDate = timeFrame.startDate;
         var endDate = timeFrame.endDate;
         let dataPoints: DataPointsType[] = [];
         for (var i = 0; i < stockTimeSeries.length; i++) {
             var timeSeriesInInterval =
-                (startDate == undefined && endDate == undefined)
-                || (endDate == undefined && startDate != undefined && stockTimeSeries[i].date >= startDate)
-                || (startDate == undefined && endDate != undefined && stockTimeSeries[i].date <= endDate)
-                || (startDate != undefined && endDate != undefined && stockTimeSeries[i].date >= startDate && stockTimeSeries[i].date <= endDate)
-            console.log(stockTimeSeries[i].date, timeSeriesInInterval)
+                (startDate === undefined && endDate === undefined)
+                || (endDate === undefined && startDate !== undefined && stockTimeSeries[i].date >= startDate)
+                || (startDate === undefined && endDate !== undefined && stockTimeSeries[i].date <= endDate)
+                || (startDate !== undefined && endDate !== undefined && stockTimeSeries[i].date >= startDate && stockTimeSeries[i].date <= endDate)
             if (timeSeriesInInterval) {
                 dataPoints.push({
                     x: stockTimeSeries[i].date,
@@ -127,13 +135,16 @@ const StockSymbolChart: React.FC<Props> = ({ stockTimeSeries, stockSymbol, timeS
             }
         }
         options.data[0].dataPoints = dataPoints;
+        options.data[1].dataPoints = [];
 
         if (chartRef) {
             setChart(chartRef);
             chartRef.render();
         }
         let chartLocal = chart ? chart : chartRef;
+
         if (chartLocal) {
+            calculateMovingAverage(chartLocal);
             chartLocal.render();
         }
     }, [stockTimeSeries, timeFrame])
