@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import StockService, { StockSymbol } from './services/StockService';
+import StockService from './services/StockService';
+import { StockSymbol } from './model/StockSymbol';
 
 import StockSymbolPanel from './StockSymbolPanel';
 import DashboardPanel from './DashboardPanel';
+
+
+
+import './DashboarApp.css';
 
 
 const DashboardApp: React.FC = () => {

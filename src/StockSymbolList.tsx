@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import StockService, { StockSymbol } from './services/StockService';
+import StockService from './services/StockService';
+import { StockSymbol } from './model/StockSymbol';
 
 type Props = {
     filterText: string

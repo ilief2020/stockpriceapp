@@ -1,0 +1,9 @@
+.calendar {
+    width: 300px;
+    position: absolute;
+    z-index: 100;
+}
+
+.datelabel{
+   position: relative;
+}

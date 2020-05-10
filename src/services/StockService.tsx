@@ -1,54 +1,7 @@
 
 import axios from 'axios';
 
-
-export type StockSymbol = {
-    name: string
-    symbol: string;
-}
-
-export type StockTimeSeries = {
-    open: number,
-    high: number,
-    low: number,
-    close: number,
-    volume: number,
-    date: Date
-}
-
-export enum TimeSeriesType {
-    TIME_SERIES_INTRADAY = '',
-    TIME_SERIES_DAILY = 'TIME_SERIES_DAILY',
-    TIME_SERIES_WEEKLY = '',
-    TIME_SERIES_MONTHLY = 'TIME_SERIES_MONTHLY',
-};
-
-export function toTimeSeriesLabel(value: TimeSeriesType) {
-    switch (value) {
-        case TimeSeriesType.TIME_SERIES_DAILY:
-            return 'Time Series (Daily)';
-        default:
-            return 'Monthly Time Series';
-    }
-}
-
-export function stringToTimeSeries(value: string) {
-    switch (value) {
-        case 'TIME_SERIES_DAILY':
-            return TimeSeriesType.TIME_SERIES_DAILY;
-        case 'TIME_SERIES_MONTHLY':
-            return TimeSeriesType.TIME_SERIES_MONTHLY;
-        default:
-            return 'Time Series (Daily)';
-    }
-}
-
-
-export type StockParams = {
-    function: TimeSeriesType,
-    symbol: string
-}
-
+import { StockServiceParams } from '../model/StockServiceParams';
 
 const StockService = {
     getStockSymbols,
@@ -81,16 +34,16 @@ function getStockSymbols(searchKey: string) {
         })
 };
 
-function getStockTimeSeries(params: StockParams) {
+function getStockTimeSeries(params: StockServiceParams) {
     return axios.get(API, {
         params: {
-            'function': params.function,
+            'function': params.function.key,
             'symbol': params.symbol,
             'apikey': '351OA9LA71A34T9J',
         }
     })
         .then(function (response) {
-            const responseTimeSeries = response.data[toTimeSeriesLabel(params.function)];
+            const responseTimeSeries = response.data[params.function.displayName];
 
 
             if (!responseTimeSeries) {

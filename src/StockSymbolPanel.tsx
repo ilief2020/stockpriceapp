@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import StockService, { StockSymbol } from './services/StockService';
+import StockService from './services/StockService';
+import { StockSymbol } from './model/StockSymbol';
 import StockSymbolSearch from './StockSymbolSearch';
 import StockSymbolList from './StockSymbolList';
 
@@ -26,7 +27,7 @@ const StockSymbolPanel: React.FC<Props> = ({ onStockSymbolChange }: Props) => {
     }
 
     return (
-        <div>
+        <div className="item">
             <StockSymbolSearch filterText={filterText} onFilterTextChange={handleOnFilterTextChange} />
             <StockSymbolList filterText={filterText} onStockSymbolChange={handleOnStockSymbolChange} />
         </div>

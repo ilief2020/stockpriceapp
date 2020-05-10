@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import StockService, { StockTimeSeries, StockParams, TimeSeriesType, StockSymbol, stringToTimeSeries } from './services/StockService';
+import StockService from './services/StockService';
 import StockSymbolChart from './StockSymbolChart'
+
+import { StockSymbol } from './model/StockSymbol';
+import { StockTimeSeries } from './model/StockTimeSeries';
+import { TimeSeriesType } from './model/TimeSeriesType';
+import { TimeFrame } from './model/TimeFrame';
+
+import CalendarPicker from './components/CalendarPickerComp';
 
 
 type Props = {
@@ -13,6 +20,26 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
 
     const [currTimeSeriesType, setCurrTimeSeriesType] = useState<TimeSeriesType>(TimeSeriesType.TIME_SERIES_DAILY);
 
+    const [startDate, setStartDate] = useState<Date | undefined>();
+    const [endDate, setEndDate] = useState<Date | undefined>();
+
+    const [timeFrame, setTimeFrame] = useState<TimeFrame>(new TimeFrame(undefined, undefined))
+
+    function onStartDateChange(date: Date) {
+        let localtimeFrame = new TimeFrame(timeFrame.getStartDate(), timeFrame.getEndDate());
+        localtimeFrame.setStartDate(date);
+        console.log('start', timeFrame, timeFrame.startDate, timeFrame.getStartDate());
+        setTimeFrame(localtimeFrame);
+
+    }
+
+    function onEndDateChange(date: Date) {
+        let localtimeFrame = new TimeFrame(timeFrame.getStartDate(), timeFrame.getEndDate());
+        localtimeFrame.setEndDate(date);
+        setTimeFrame(localtimeFrame);
+    }
+
+
     useEffect(() => {
         stockSymbol &&
             StockService.getStockTimeSeries({ function: currTimeSeriesType, symbol: stockSymbol.symbol }).then((data: StockTimeSeries[]) => {
@@ -20,16 +47,16 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
             });
     }, [stockSymbol])
 
-    function onTimeFrameChange(e: any) {
-        //setTimeFrame(stringToTimeSeries(e.target.data-id))
-    }
+
     return (
-        <div className="item">
+        <div className="item2">
             {/* <ul onClick={onTimeFrameChange}>
                 
                   {Object.entries(TimeSeriesType).map(( value : [string, TimeSeriesType]) => <li key={value.} data-id={key}>{ss.name}</li>)} </ul> */}
+            <CalendarPicker label='Start Date' date={timeFrame.startDate} onDateChange={onStartDateChange} />
+            <CalendarPicker label='End Date' date={timeFrame.endDate} onDateChange={onEndDateChange} />
 
-            <StockSymbolChart stockSymbol={stockSymbol} stockTimeSeries={stockTimeSeries} timeSeriesType={currTimeSeriesType} />
+            <StockSymbolChart stockSymbol={stockSymbol} stockTimeSeries={stockTimeSeries} timeSeriesType={currTimeSeriesType} timeFrame={timeFrame} />
         </div >
     );
 }
