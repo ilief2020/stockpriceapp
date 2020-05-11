@@ -8,6 +8,7 @@ import { TimeSeriesType } from './model/TimeSeriesType';
 import { TimeFrame } from './model/TimeFrame';
 
 import CalendarPicker from './components/CalendarPickerComp';
+import NoteComp from './components/NoteComp';
 
 
 type Props = {
@@ -54,10 +55,10 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
                 });
     }, [stockSymbol, currTimeSeriesType])
 
-
     return (
         <div >
-            <div><b>Stock Symbol:   {stockSymbol?.name} </b></div><br />
+            <div>Stock Symbol:   <b>{stockSymbol?.name} </b></div><br />
+            <NoteComp>Change the Start/End date to visualize a specific period. </NoteComp>
             <CalendarPicker label='Start Date' minDate={minDate}
                 maxDate={maxDate} date={timeFrame.startDate} onDateChange={onStartDateChange} />
             <CalendarPicker label='End Date' minDate={minDate}

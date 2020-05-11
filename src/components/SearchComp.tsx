@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './SearchComp.css';
+import NoteComp from './NoteComp';
 
 type Props = {
     filterText: string;
@@ -16,10 +17,10 @@ const SearchComp: React.FC<Props> = ({ filterText, onFilterTextChange }) => {
 
     return (
         <div className='search-div'>
-            <div className="note">Every change in input makes a request. <br />
+            <NoteComp>Every change in input makes a request. <br />
                 Max 5 requests per minute are allowed. <br />
                 Keep one for the data request. :)
-                </div>
+                </NoteComp>
             <input className='search-input' placeholder='Search ...' value={filterText} onChange={onChange}></input>
         </div>
     );
