@@ -13,6 +13,7 @@ const StockSymbolList: React.FC<Props> = ({ filterText, onStockSymbolChange }) =
     const [stockSymbols, setStockSymbols] = useState<StockSymbol[]>([]);
 
     useEffect(() => {
+        if (!filterText) return;
         StockService.getStockSymbols(filterText).then((data: StockSymbol[]) => {
             setStockSymbols(data)
         });

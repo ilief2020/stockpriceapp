@@ -2,6 +2,7 @@
     width: 300px;
     position: absolute;
     z-index: 100;
+    background-color: lightgray;
 }
 
 .datelabel{

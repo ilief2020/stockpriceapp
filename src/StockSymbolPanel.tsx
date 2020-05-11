@@ -12,12 +12,6 @@ const StockSymbolPanel: React.FC<Props> = ({ onStockSymbolChange }: Props) => {
     const [stockSymbols, setStockSymbols] = useState<StockSymbol[]>([]);
     const [filterText, setFilterText] = useState<string>('');
 
-    useEffect(() => {
-        StockService.getStockSymbols(filterText).then((data: StockSymbol[]) => {
-            setStockSymbols(data)
-        });
-    }, [filterText])
-
     function handleOnFilterTextChange(newValue: string) {
         setFilterText(newValue);
     }

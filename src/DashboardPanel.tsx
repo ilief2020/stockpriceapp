@@ -21,6 +21,8 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
     const [currTimeSeriesType, setCurrTimeSeriesType] = useState<TimeSeriesType>(TimeSeriesType.TIME_SERIES_DAILY);
 
     const [timeFrame, setTimeFrame] = useState<TimeFrame>(new TimeFrame(undefined, undefined))
+    const [minDate, setMinDate] = useState<Date | undefined>()
+    const [maxDate, setMaxDate] = useState<Date | undefined>()
 
     function onStartDateChange(date: Date) {
         let localtimeFrame = new TimeFrame(timeFrame.getStartDate(), timeFrame.getEndDate());
@@ -41,8 +43,12 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
             StockService.getStockTimeSeries({ function: currTimeSeriesType, symbol: stockSymbol.symbol })
                 .then((data: StockTimeSeries[]) => {
                     if (data && data.length > 2) {
-                        let localtimeFrame = new TimeFrame(data[data.length - 1].date, data[0].date);
+                        let minDate = data[data.length - 1].date;
+                        let maxDate = data[0].date;
+                        let localtimeFrame = new TimeFrame(minDate, maxDate);
                         setTimeFrame(localtimeFrame);
+                        setMinDate(minDate);
+                        setMaxDate(maxDate);
                     }
                     setStockTimeSeries(data)
                 });
@@ -52,10 +58,16 @@ const DashBoardPanel: React.FC<Props> = ({ stockSymbol }) => {
     return (
         <div >
             <div><b>Stock Symbol:   {stockSymbol?.name} </b></div><br />
-            <CalendarPicker label='Start Date' date={timeFrame.startDate} onDateChange={onStartDateChange} />
-            <CalendarPicker label='End Date' date={timeFrame.endDate} onDateChange={onEndDateChange} />
+            <CalendarPicker label='Start Date' minDate={minDate}
+                maxDate={maxDate} date={timeFrame.startDate} onDateChange={onStartDateChange} />
+            <CalendarPicker label='End Date' minDate={minDate}
+                maxDate={maxDate} date={timeFrame.endDate} onDateChange={onEndDateChange} />
 
-            <StockSymbolChart stockSymbol={stockSymbol} stockTimeSeries={stockTimeSeries} timeSeriesType={currTimeSeriesType} timeFrame={timeFrame} />
+            <StockSymbolChart stockSymbol={stockSymbol}
+                stockTimeSeries={stockTimeSeries}
+                timeSeriesType={currTimeSeriesType}
+                timeFrame={timeFrame}
+            />
         </div >
     );
 }

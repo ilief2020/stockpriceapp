@@ -38,7 +38,7 @@ const opts = {
     axisY: {
         title: "Open Price (in EUR)",
         includeZero: false,
-        valueFormatString: "€##0.00",
+        valueFormatString: "€##0.000",
         crosshair: {
             enabled: true,
             snapToDataPoint: true,
@@ -50,7 +50,7 @@ const opts = {
     data: [{
         type: "column",
         xValueFormatString: "DD MMM",
-        yValueFormatString: "€##0.00",
+        yValueFormatString: "€##0.000",
         dataPoints: [
 
         ]
@@ -59,7 +59,7 @@ const opts = {
         type: "spline",
         markerSize: 0,
         name: "SMA",
-        yValueFormatString: "#,##0.00",
+        yValueFormatString: "#,##0.000",
         dataPoints: []
     }
     ]

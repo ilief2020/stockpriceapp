@@ -44,8 +44,6 @@ function getStockTimeSeries(params: StockServiceParams) {
     })
         .then(function (response) {
             const responseTimeSeries = response.data[params.function.displayName];
-
-
             if (!responseTimeSeries) {
                 return [];
             }

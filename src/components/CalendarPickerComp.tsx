@@ -8,10 +8,12 @@ import './CalendarPicker.css';
 type Props = {
     label: string;
     date: Date | undefined;
+    minDate: Date | undefined;
+    maxDate: Date | undefined;
     onDateChange: (date: Date) => void;
 }
 
-const CalendarPicker: React.FC<Props> = ({ label, date, onDateChange }) => {
+const CalendarPicker: React.FC<Props> = ({ label, minDate, maxDate, date, onDateChange }) => {
 
     const [editStartDate, setEditStartDate] = useState<boolean>(false);
 
@@ -30,13 +32,16 @@ const CalendarPicker: React.FC<Props> = ({ label, date, onDateChange }) => {
         return dateFormat(date, "dd mmm yy");
     }
 
-
     return (
         <div>
             <div className="datelabel" onClick={onStartDateClick}><b>{label}</b> {formatAsString(date)}</div>
             {editStartDate &&
                 <div className="calendar">
                     <Calendar
+                        minDate={minDate}
+                        maxDate={maxDate}
+                        selectRange={false}
+                        returnValue='start'
                         onChange={onStartDateChange}
                         value={date}
                     />
