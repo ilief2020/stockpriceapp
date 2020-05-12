@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/stockpriceapp/static/css/main.8611a57b.chunk.css",
+    "main.js": "/stockpriceapp/static/js/main.603d89d9.chunk.js",
+    "main.js.map": "/stockpriceapp/static/js/main.603d89d9.chunk.js.map",
+    "runtime-main.js": "/stockpriceapp/static/js/runtime-main.2c41bf5b.js",
+    "runtime-main.js.map": "/stockpriceapp/static/js/runtime-main.2c41bf5b.js.map",
+    "static/js/2.696f385a.chunk.js": "/stockpriceapp/static/js/2.696f385a.chunk.js",
+    "static/js/2.696f385a.chunk.js.map": "/stockpriceapp/static/js/2.696f385a.chunk.js.map",
+    "index.html": "/stockpriceapp/index.html",
+    "precache-manifest.c8d5ae27a036fed9fb992a5d03cca16f.js": "/stockpriceapp/precache-manifest.c8d5ae27a036fed9fb992a5d03cca16f.js",
+    "service-worker.js": "/stockpriceapp/service-worker.js",
+    "static/css/main.8611a57b.chunk.css.map": "/stockpriceapp/static/css/main.8611a57b.chunk.css.map",
+    "static/js/2.696f385a.chunk.js.LICENSE.txt": "/stockpriceapp/static/js/2.696f385a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2c41bf5b.js",
+    "static/js/2.696f385a.chunk.js",
+    "static/css/main.8611a57b.chunk.css",
+    "static/js/main.603d89d9.chunk.js"
+  ]
+}
