@@ -19,7 +19,7 @@ function App() {
         <hr />
 
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/stockpriceapp">
             <Home />
           </Route>
           <Route path="/dashboard">

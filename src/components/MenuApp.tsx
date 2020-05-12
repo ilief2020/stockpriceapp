@@ -11,7 +11,7 @@ const MenuApp: React.FC<any> = () => {
         <div>
             <ul className='menu'>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/stockpriceapp">Home</Link>
                 </li>
                 <li>
                     <Link to="/dashboard">Dashboard</Link>
